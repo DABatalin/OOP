@@ -1,0 +1,1 @@
+/usr/bin/g++-11 -g -rdynamic CMakeFiles/huggy_vaggy.dir/main.cpp.o CMakeFiles/huggy_vaggy.dir/time_converter.cpp.o -o huggy_vaggy 

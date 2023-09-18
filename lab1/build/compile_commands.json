@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/moses/cs/cpp_tests/myapp-release/build",
+  "command": "/usr/bin/g++-11   -g -std=gnu++17 -o CMakeFiles/huggy_vaggy.dir/main.cpp.o -c /home/moses/cs/cpp_tests/myapp-release/main.cpp",
+  "file": "/home/moses/cs/cpp_tests/myapp-release/main.cpp"
+},
+{
+  "directory": "/home/moses/cs/cpp_tests/myapp-release/build",
+  "command": "/usr/bin/g++-11   -g -std=gnu++17 -o CMakeFiles/huggy_vaggy.dir/time_converter.cpp.o -c /home/moses/cs/cpp_tests/myapp-release/time_converter.cpp",
+  "file": "/home/moses/cs/cpp_tests/myapp-release/time_converter.cpp"
+},
+{
+  "directory": "/home/moses/cs/cpp_tests/myapp-release/build",
+  "command": "/usr/bin/g++-11   -g -DGTEST_HAS_PTHREAD=1 -std=gnu++17 -o CMakeFiles/tests01.dir/tests01.cpp.o -c /home/moses/cs/cpp_tests/myapp-release/tests01.cpp",
+  "file": "/home/moses/cs/cpp_tests/myapp-release/tests01.cpp"
+},
+{
+  "directory": "/home/moses/cs/cpp_tests/myapp-release/build",
+  "command": "/usr/bin/g++-11   -g -DGTEST_HAS_PTHREAD=1 -std=gnu++17 -o CMakeFiles/tests01.dir/time_converter.cpp.o -c /home/moses/cs/cpp_tests/myapp-release/time_converter.cpp",
+  "file": "/home/moses/cs/cpp_tests/myapp-release/time_converter.cpp"
+}
+]
