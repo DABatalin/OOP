@@ -1,7 +1,0 @@
-/home/moses/cs/cpp_tests/myapp-release/build/CMakeFiles/huggy_vaggy.dir
-/home/moses/cs/cpp_tests/myapp-release/build/CMakeFiles/tests01.dir
-/home/moses/cs/cpp_tests/myapp-release/build/CMakeFiles/package.dir
-/home/moses/cs/cpp_tests/myapp-release/build/CMakeFiles/package_source.dir
-/home/moses/cs/cpp_tests/myapp-release/build/CMakeFiles/test.dir
-/home/moses/cs/cpp_tests/myapp-release/build/CMakeFiles/edit_cache.dir
-/home/moses/cs/cpp_tests/myapp-release/build/CMakeFiles/rebuild_cache.dir
