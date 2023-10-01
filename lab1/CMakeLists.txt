@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(huggy_vaggy VERSION 0.1.0 LANGUAGES C CXX)
+project(lab1 VERSION 0.1.0 LANGUAGES C CXX)
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
@@ -7,7 +7,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(huggy_vaggy main.cpp time_converter.cpp)
+add_executable(lab1 main.cpp time_converter.cpp)
 
 enable_testing()
 

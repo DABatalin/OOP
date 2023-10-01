@@ -31,6 +31,11 @@ TEST(test_06, basic_test_set)
     ASSERT_TRUE(time_converter(10, 10, "toyotalancruiserprado") == "ERROR: Wrong input data\n");
 }
 
+TEST(test_07, basic_test_set)
+{
+    ASSERT_TRUE(time_converter(12, 00, "am") == "1200");
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
