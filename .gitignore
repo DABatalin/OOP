@@ -12,5 +12,3 @@
 *.vsix
 
 *build*/
-
-.gitignore
