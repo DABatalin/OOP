@@ -11,7 +11,7 @@ add_executable(lab1 main.cpp time_converter.cpp)
 
 enable_testing()
 
-add_executable(tests01 tests01.cpp time_converter.cpp)
-target_link_libraries(tests01 ${GTEST_LIBRARIES})
+add_executable(lab1_tests tests01.cpp time_converter.cpp)
+target_link_libraries(lab1_tests ${GTEST_LIBRARIES})
 
-add_test(NAME BASIC COMMAND tests01)
+add_test(NAME BASIC COMMAND lab1_tests)

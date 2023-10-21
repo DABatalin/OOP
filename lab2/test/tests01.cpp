@@ -143,6 +143,22 @@ TEST(ThreeOperators, OperatorPlus) {
 
 }
 
+TEST(ThreeOperators, OperatorPlusThree) {
+	// Arrange
+	Three three1("1010101");
+	Three three2("202020");
+	unsigned char expectedArray[] = {'1', '2', '1', '2', '1', '2', '1'};
+
+	// Act
+	Three three3 = three1 + three2;
+	unsigned char* threeArray = three3.getThreeArray();
+
+	// Assert
+	for (size_t i = 0; i < three3.getSize(); i++) 
+		ASSERT_EQ(threeArray[i], expectedArray[i]);
+
+}
+
 TEST(ThreeOperators, OperatorMinus) {
 	// Arrange
 	Three three1("1111");
