@@ -22,7 +22,7 @@ target_link_libraries(lab3 PRIVATE lab_3_lib)
 
 enable_testing()
 
-add_executable(lab3_tests ${TEST_DIR}/tests01.cpp ${SOURCE_DIR}/hexagon.cpp ${SOURCE_DIR}/pentagon.cpp ${SOURCE_DIR}/rhombus.cpp)
+add_executable(lab3_tests ${TEST_DIR}/tests01.cpp ${SOURCE_DIR}/hexagon.cpp ${SOURCE_DIR}/pentagon.cpp ${SOURCE_DIR}/rhombus.cpp ${SOURCE_DIR}/array.cpp)
 target_link_libraries(lab3_tests ${GTEST_LIBRARIES})
 
 add_test(NAME BASIC COMMAND lab3_tests)

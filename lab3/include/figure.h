@@ -2,6 +2,7 @@
 #define FIGURE_H
 #include <string>
 #include <iostream>
+#include <vector>
 
 // Будем считать, что вершины фигуры подаются на вход по или против часовой стрелки
 class Figure

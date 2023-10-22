@@ -2,10 +2,10 @@
 
 Array::Array() 
 {
-    _size = 100;
+    _size = 1000;
     _figures = new Figure*[_size];
 
-    for (int i = 0; i != _size; ++i)
+    for (int i = 0; i < _size; ++i)
         _figures[i] = nullptr;
 }
 
@@ -14,7 +14,7 @@ Array::Array(int size)
     _size = size;
     _figures = new Figure*[_size];
 
-    for (int i = 0; i != _size; ++i)
+    for (int i = 0; i < _size; ++i)
         _figures[i] = nullptr;
 }
 
@@ -38,7 +38,6 @@ void Array::delete_figure(int i)
     if (i >= _size)
         throw std::invalid_argument("Out of range");
 
-    delete _figures[i];
     _figures[i] = nullptr;
 }
 
@@ -53,11 +52,15 @@ void Array::replace_figure(int i, Figure* figure)
 
 double Array::average_area() 
 {
+    int count = 0;
     double res = 0.0;
-    for (int i = 0; i != _size; ++i) {
+    for (int i = 0; i < _size; ++i) {
         if (_figures[i] != nullptr)
-            res += (double)*_figures[i];
+        {
+            res += (double)*_figures[i]; 
+            count += 1;
+        }
     }
 
-    return res;
+    return res / count;
 }

@@ -425,6 +425,72 @@ TEST(rhombus, exception_not_a_rhombus) {
 
     EXPECT_THROW(Rhombus rh1(v), std::invalid_argument);
 }
+
+TEST(array, default_constructor) {
+	Array arr;
+
+	for(int i = 0; i < 1000; i++) 
+		ASSERT_EQ(arr[i], nullptr);
+}
+
+TEST(array, replace_figure) {
+	std::vector<std::pair<double, double>> v(4);
+	v[0].first = 1; v[0].second = 1;
+	v[1].first = 0; v[1].second = 2;
+	v[2].first = 1; v[2].second = 3;
+	v[3].first = 2; v[3].second = 2;
+
+	Array arr;
+	Rhombus rh(v);
+	arr.replace_figure(0, &rh);
+
+	ASSERT_EQ(arr[0], &rh);
+}
+
+TEST(array, average_area) {
+	std::vector<std::pair<double, double>> v(4);
+	v[0].first = 1; v[0].second = 1;
+	v[1].first = 0; v[1].second = 2;
+	v[2].first = 1; v[2].second = 3;
+	v[3].first = 2; v[3].second = 2;
+
+	std::vector<std::pair<double, double>> v1(4);
+	v[0].first = 2; v[0].second = 1;
+	v[1].first = 0; v[1].second = 3;
+	v[2].first = 2; v[2].second = 5;
+	v[3].first = 4; v[3].second = 3;
+
+	Array arr;
+	Rhombus rh(v);
+	Rhombus rh1(v1);
+	arr.replace_figure(0, &rh);
+	arr.replace_figure(1, &rh1);
+
+	ASSERT_EQ(arr.average_area(), 4);
+}
+
+TEST(array, delete_figure) {
+	std::vector<std::pair<double, double>> v(4);
+	v[0].first = 1; v[0].second = 1;
+	v[1].first = 0; v[1].second = 2;
+	v[2].first = 1; v[2].second = 3;
+	v[3].first = 2; v[3].second = 2;
+
+	std::vector<std::pair<double, double>> v1(4);
+	v[0].first = 2; v[0].second = 1;
+	v[1].first = 0; v[1].second = 3;
+	v[2].first = 2; v[2].second = 5;
+	v[3].first = 4; v[3].second = 3;
+
+	Array arr;
+	Rhombus rh(v);
+	Rhombus rh1(v1);
+	arr.replace_figure(0, &rh);
+	arr.replace_figure(1, &rh1);
+	arr.delete_figure(1);
+
+	ASSERT_EQ(arr[1], nullptr);
+}
 /*
 
 2 1
