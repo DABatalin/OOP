@@ -17,6 +17,8 @@ public:
 	
     virtual ~Figure() = default;
 
+	// = 0 говорит, что фукнция чисто виртуальная и в каждом унаследованном классе она должна
+	// быть реализована
 	virtual std::pair<double, double> get_middle_point() const = 0;
 
     virtual double get_area() const = 0;

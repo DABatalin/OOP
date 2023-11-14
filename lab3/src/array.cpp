@@ -57,6 +57,7 @@ double Array::average_area()
     for (int i = 0; i < _size; ++i) {
         if (_figures[i] != nullptr)
         {
+            // * - разыменование указателя на фигуру    
             res += (double)*_figures[i]; 
             count += 1;
         }
