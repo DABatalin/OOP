@@ -1,5 +1,5 @@
-#ifndef HEXAGON_H
-#define HEXAGON_H
+#ifndef PENTAGON_H
+#define PENTAGON_H
 #include <string>
 #include <iostream>
 #include <vector>
@@ -9,24 +9,24 @@
 
 
 template <typename T>
-class Hexagon : public Figure<T>
+class Pentagon : public Figure<T>
 {
 public:
-	unsigned int n = 6; // Количество вершин 
+	unsigned int n = 5; // Количество вершин 
 	std::vector<std::pair<T, T>> points;
 
 	// Constructors
-	Hexagon();
-	Hexagon(std::vector<std::pair<T, T>>& _points);
-	Hexagon(const Hexagon&);
-	Hexagon(Hexagon&& other);
-    virtual ~Hexagon();
+	Pentagon();
+	Pentagon(std::vector<std::pair<T, T>>& _points);
+	Pentagon(const Pentagon&);
+	Pentagon(Pentagon&& other);
+    virtual ~Pentagon();
 
 
 	// Standard operators
-	bool operator==(const Hexagon<T> &other) const;
-	Hexagon& operator=(const Hexagon<T> &other);
-	Hexagon& operator=(Hexagon<T> &&other);
+	bool operator==(const Pentagon<T> &other) const;
+	Pentagon& operator=(const Pentagon<T> &other);
+	Pentagon& operator=(Pentagon<T> &&other);
 
 	// explicit в данном случае запрещает случайный неявный вызов оператора преобразования типа
 	explicit operator double() const; //override;
@@ -34,7 +34,7 @@ public:
 };
 
 template <typename T>
-inline std::ostream& operator<<(std::ostream& os, const Hexagon<T>& p)
+inline std::ostream& operator<<(std::ostream& os, const Pentagon<T>& p)
 {
 	os << "Точки: " << std::endl;
     for (int i = 0; i != p.points.size(); ++i) {
@@ -45,27 +45,27 @@ inline std::ostream& operator<<(std::ostream& os, const Hexagon<T>& p)
 }
 
 template <typename T>
-inline std::istream& operator>>(std::istream& is, Hexagon<T>& p)
+inline std::istream& operator>>(std::istream& is, Pentagon<T>& p)
 {
-    std::vector<std::pair<T, T>> v(6);
+    std::vector<std::pair<T, T>> v(5);
 
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 5; ++i) {
 		std::cout << "Введите x и y " << i + 1 << " точки: ";
         is >> v[i].first >> v[i].second;
     }
-    p = Hexagon(v);
+    p = Pentagon(v);
 
     return is;
 }
 
 template <typename T>
-Hexagon<T>::Hexagon()
+Pentagon<T>::Pentagon()
 {
 	points.resize(n);
 }
 
 template <typename T>
-Hexagon<T>::Hexagon(std::vector<std::pair<T, T>>& _points) {
+Pentagon<T>::Pentagon(std::vector<std::pair<T, T>>& _points) {
 	std::cout << "Vector constructor init" << std::endl;
 	// Points amount check
 	if (_points.size() != n) 
@@ -81,22 +81,22 @@ Hexagon<T>::Hexagon(std::vector<std::pair<T, T>>& _points) {
 }
 
 template <typename T>
-Hexagon<T>::Hexagon(const Hexagon& other) {
+Pentagon<T>::Pentagon(const Pentagon& other) {
     points = other.points;
 }
 
 template <typename T>
-Hexagon<T>::Hexagon(Hexagon&& other) {
+Pentagon<T>::Pentagon(Pentagon&& other) {
     points = std::move(other.points);
 }
 
 
 template <typename T>
-Hexagon<T>::~Hexagon() {}
+Pentagon<T>::~Pentagon() {}
 
 
 template <typename T>
-bool Hexagon<T>::operator==(const Hexagon<T> &other) const
+bool Pentagon<T>::operator==(const Pentagon<T> &other) const
 {
 	for (int i = 0; i < n; i++) {
 		int check = 0;
@@ -116,7 +116,7 @@ bool Hexagon<T>::operator==(const Hexagon<T> &other) const
 }
 
 template <typename T>
-Hexagon<T>& Hexagon<T>::operator=(const Hexagon<T> &other) 
+Pentagon<T>& Pentagon<T>::operator=(const Pentagon<T> &other) 
 {
 	points = other.points;
 
@@ -124,7 +124,7 @@ Hexagon<T>& Hexagon<T>::operator=(const Hexagon<T> &other)
 }
 
 template <typename T>
-Hexagon<T>& Hexagon<T>::operator=(Hexagon<T> &&other) 
+Pentagon<T>& Pentagon<T>::operator=(Pentagon<T> &&other) 
 {
    	points = std::move(other.points);
 
@@ -132,7 +132,7 @@ Hexagon<T>& Hexagon<T>::operator=(Hexagon<T> &&other)
 }
 
 template <typename T>
-Hexagon<T>::operator double() const {
-    return (double)figures::get_area<Hexagon<T>, T>(*this);
+Pentagon<T>::operator double() const {
+    return (double)figures::get_area<Pentagon<T>, T>(*this);
 }
 #endif

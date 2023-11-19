@@ -13,9 +13,11 @@ public:
     Array(const array& figures) : _figures(figures) {}
 	// methods
 
-    void printFigures();
+    // void printFigures();
     void delete_figure(int i);
     double total_area();
+
+    std::shared_ptr<T> operator[](int i);
 
 private:
     array _figures;
@@ -23,19 +25,6 @@ private:
 
 template <class T>
 Array<T>::Array() {}
-
-
-template <class T>
-void Array<T>::printFigures() {
-    // for (std::shared_ptr<Figure<T>>& figure : this->figures) {
-     for (int i = 0; i < this->_figures.size(); ++i) {
-        std::cout << *(this->_figures[i]);
-        // std::cout << "Геометрический центр: " << figures::get_middle_point(*figure).first <<
-        // "\nПлощадь: " << double(*(figure)) << std::endl;
-    }
-    
-}
-
 
 template <class T>
 void Array<T>::delete_figure(int i)
@@ -51,10 +40,18 @@ template <class T>
 double Array<T>::total_area() 
 {
     double res = 0;
-    // for (std::shared_ptr<Figure<T>>& figure : this->figures) {
     for (int i = 0; i < this->_figures.size(); ++i) {
         res += double(*(this->_figures[i]));
     }
 
     return res;
+}
+
+template <class T>
+std::shared_ptr<T> Array<T>::operator[](int i) 
+{
+    if (i >= this->_figures.size())
+        throw std::invalid_argument("The array index is out of range");
+
+    return this->_figures[i];
 }

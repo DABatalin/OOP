@@ -9,8 +9,8 @@ namespace figures {
 		std::pair<T, T> middle_point;
 		for (int i = 0; i < f.n; i++)
 		{
-			middle_point.first += f.points.back().first / f.n;
-			middle_point.second += f.points.back().second / f.n;
+			middle_point.first += f.points[i].first / f.n;
+			middle_point.second += f.points[i].second / f.n;
 		}
 		return middle_point;
 	}

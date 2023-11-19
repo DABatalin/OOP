@@ -25,15 +25,5 @@ public:
 };
 
 
-template <typename T>
-std::ostream& operator<<(std::ostream& os, const Figure<T>& p)
-{
-	os << "Точки: " << std::endl;
-    for (int i = 0; i != p.points.size(); ++i) {
-        os << "Точка " << i + 1 << ": "<< "[x" << " = " << p.points[i].first << ", "
-           << "y" << " = " << p.points[i].second << "];" << std::endl;
-    }
-    return os;
-}
 
 #endif

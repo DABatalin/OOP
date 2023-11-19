@@ -5,113 +5,79 @@
 #include "hexagon.h"
 #include "pentagon.h"
 #include "rhombus.h"
+#include "methods.h"
 
+std::vector<std::pair<double, double>> hex_vector{{2, 1}, {1, 2}, {1, 3}, {2, 4}, {3, 3}, {3, 2}};
+std::vector<std::pair<double, double>> hex_vector2{{3, 2}, {2, 3}, {2, 4}, {3, 5}, {4, 4}, {4, 3}};
+std::vector<std::pair<double, double>> hex_zero_vector{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
 
 TEST(hexagon, default_constructor)
 {
-	Hexagon hex;
-	std::pair<double, double> para;
-	para.first = 0;
-	para.second = 0;
-	ASSERT_EQ(hex.get_area(), 0);
-	ASSERT_EQ(hex.get_middle_point(), para);
-	ASSERT_EQ(hex.get_points().size(), 6);
+	Hexagon<double> hex;
+	std::pair<double, double> pair;
+	std::pair<double, double> pair2;
+	pair.first = 0;
+	pair.second = 0;
+	pair2.first = 0;
+	pair2.second = 0;
+	double area = figures::get_area<Hexagon<double>, double>(hex);
+	pair2 = figures::get_middle_point<Hexagon<double>, double>(hex);
+	ASSERT_EQ(area, 0);
+	ASSERT_EQ(pair2, pair);
+	ASSERT_EQ(hex.points, hex_zero_vector);
+	
 }
 
 TEST(hexagon, area1)
 {
-	std::vector<std::pair<double, double>> v(6);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-	v[5].first = 3; v[5].second = 2;
-
-	Hexagon hex(v);
-	ASSERT_EQ(hex.get_area(), 4);
-	ASSERT_EQ(hex.get_points(), v);
+	Hexagon<double> hex(hex_vector);
+	double area = figures::get_area<Hexagon<double>, double>(hex);
+	ASSERT_EQ(area, 4);
+	ASSERT_EQ(hex.points, hex_vector);
 }
 
 TEST(hexagon, area2)
 {
-	std::vector<std::pair<double, double>> v(6);
-	v[0].first = 0; v[0].second = 0;
-	v[1].first = 0; v[1].second = 0;
-	v[2].first = 0; v[2].second = 0;
-	v[3].first = 0; v[3].second = 0;
-	v[4].first = 0; v[4].second = 0;
-	v[5].first = 0; v[5].second = 0;
-
-	Hexagon hex(v);
-	ASSERT_EQ(hex.get_area(), 0);
-	ASSERT_EQ(hex.get_points(), v);
+	Hexagon<double> hex(hex_zero_vector);
+	double area = figures::get_area<Hexagon<double>, double>(hex);
+	ASSERT_EQ(area, 0);
+	ASSERT_EQ(hex.points, hex_zero_vector);
 }
 
 TEST(hexagon, middle_point1)
 {
-	std::vector<std::pair<double, double>> v(6);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-	v[5].first = 3; v[5].second = 2;
-
-	Hexagon hex(v);
-	std::pair<double, double> para;
-	para.first = 2;
-	para.second = 2.5;
-	ASSERT_EQ(hex.get_middle_point(), para);
-	ASSERT_EQ(hex.get_points(), v);
+	Hexagon<double> hex(hex_vector);
+	std::pair<double, double> pair;
+	pair.first = 2;
+	pair.second = 2.5;
+	std::pair<double, double> middle_point = figures::get_middle_point<Hexagon<double>, double>(hex);
+	ASSERT_EQ(middle_point, pair);
+	ASSERT_EQ(hex.points, hex_vector);
 }
 
 TEST(hexagon, middle_point2)
 {
-	std::vector<std::pair<double, double>> v(6);
-	v[0].first = 0; v[0].second = 0;
-	v[1].first = 0; v[1].second = 0;
-	v[2].first = 0; v[2].second = 0;
-	v[3].first = 0; v[3].second = 0;
-	v[4].first = 0; v[4].second = 0;
-	v[5].first = 0; v[5].second = 0;
-
-	Hexagon hex(v);
-	std::pair<double, double> para;
-	para.first = 0;
-	para.second = 0;
-	ASSERT_EQ(hex.get_middle_point(), para);
-	ASSERT_EQ(hex.get_points(), v);
+	Hexagon<double> hex(hex_zero_vector);
+	std::pair<double, double> pair;
+	pair.first = 0;
+	pair.second = 0;
+	std::pair<double, double> middle_point = figures::get_middle_point<Hexagon<double>, double>(hex);
+	ASSERT_EQ(middle_point, pair);
+	ASSERT_EQ(hex.points, hex_zero_vector);
 }
 
 TEST(hexagon, side_amount)
 {
 	std::vector<std::pair<double, double>> v(7);
 
-	EXPECT_THROW(Hexagon hex(v), std::invalid_argument);
+	EXPECT_THROW(Hexagon<double> hex(v), std::invalid_argument);
 }
 
 TEST(hexagon, eq_operator)
 {
-	std::vector<std::pair<double, double>> v(6);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-	v[5].first = 3; v[5].second = 2;
-
-	std::vector<std::pair<double, double>> v1(6);
-	v1[0].first = 3; v1[0].second = 2;
-	v1[1].first = 2; v1[1].second = 3;
-	v1[2].first = 2; v1[2].second = 4;
-	v1[3].first = 3; v1[3].second = 5;
-	v1[4].first = 4; v1[4].second = 4;
-	v1[5].first = 4; v1[5].second = 3;
-
-	Hexagon hex1(v);
-	Hexagon hex2(v);
-	Hexagon hex3(v1);
+	Hexagon<double> hex1(hex_vector);
+	Hexagon<double> hex2(hex_vector);
+	Hexagon<double> hex3(hex_vector2);
 
 	ASSERT_EQ(hex1, hex2);
 	ASSERT_FALSE(hex1 == hex3);
@@ -119,130 +85,85 @@ TEST(hexagon, eq_operator)
 
 TEST(hexagon, copy_operator)
 {
-	std::vector<std::pair<double, double>> v(6);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-	v[5].first = 3; v[5].second = 2;
-
-	std::vector<std::pair<double, double>> v1(6);
-	v1[0].first = 3; v1[0].second = 2;
-	v1[1].first = 2; v1[1].second = 3;
-	v1[2].first = 2; v1[2].second = 4;
-	v1[3].first = 3; v1[3].second = 5;
-	v1[4].first = 4; v1[4].second = 4;
-	v1[5].first = 4; v1[5].second = 3;
-
-	Hexagon hex1;
-	Hexagon hex2(v);
-	Hexagon hex3(v1);
+	Hexagon<double> hex1;
+	Hexagon<double> hex2(hex_vector);
+	Hexagon<double> hex3(hex_vector2);
 
     hex1 = hex2;
     ASSERT_EQ(hex1, hex2);
-    Hexagon hex4;
+    Hexagon<double> hex4;
     hex4 = hex1;
     hex2 = hex3;
     ASSERT_EQ(hex1, hex4);
 }
 
 TEST(hexagon, double_cast) {
-	std::vector<std::pair<double, double>> v(6);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-	v[5].first = 3; v[5].second = 2;
-    Hexagon hex1(v);
+    Hexagon<double> hex1(hex_vector);
     double a = (double)hex1;
     EXPECT_EQ(a, 4);
 }
 
+std::vector<std::pair<double, double>> pent_vector{{2, 1}, {1, 2}, {1, 3}, {2, 4}, {3, 3}};
+std::vector<std::pair<double, double>> pent_vector2{{3, 2}, {2, 3}, {2, 4}, {3, 5}, {4, 4}};
+std::vector<std::pair<double, double>> pent_zero_vector{{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+
 TEST(pentagon, default_constructor)
 {
-	Pentagon pent;
-	std::pair<double, double> para;
-	para.first = 0;
-	para.second = 0;
-	ASSERT_EQ(pent.get_area(), 0);
-	ASSERT_EQ(pent.get_middle_point(), para);
-	ASSERT_EQ(pent.get_points().size(), 5);
+	Pentagon<double> pent;
+	std::pair<double, double> pair;
+	std::pair<double, double> pair2;
+	pair.first = 0;
+	pair.second = 0;
+	pair2.first = 0;
+	pair2.second = 0;
+	double area = figures::get_area<Pentagon<double>, double>(pent);
+	pair2 = figures::get_middle_point<Pentagon<double>, double>(pent);
+	ASSERT_EQ(area, 0);
+	ASSERT_EQ(pair2, pair);
+	ASSERT_EQ(pent.points, pent_zero_vector);
+	
 }
 
 TEST(pentagon, area1)
 {
-	std::vector<std::pair<double, double>> v(5);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-
-	Pentagon pent(v);
-	ASSERT_EQ(pent.get_area(), 3.5);
-	ASSERT_EQ(pent.get_points(), v);
+	Pentagon<double> pent(pent_vector);
+	double area = figures::get_area<Pentagon<double>, double>(pent);
+	ASSERT_EQ(area, 3.5);
+	ASSERT_EQ(pent.points, pent_vector);
 }
 
 TEST(pentagon, area2)
 {
-	std::vector<std::pair<double, double>> v(5);
-	v[0].first = 0; v[0].second = 0;
-	v[1].first = 0; v[1].second = 0;
-	v[2].first = 0; v[2].second = 0;
-	v[3].first = 0; v[3].second = 0;
-	v[4].first = 0; v[4].second = 0;
-
-	Pentagon pent(v);
-	ASSERT_EQ(pent.get_area(), 0);
-	ASSERT_EQ(pent.get_points(), v);
+	Pentagon<double> pent(pent_zero_vector);
+	double area = figures::get_area<Pentagon<double>, double>(pent);
+	ASSERT_EQ(area, 0);
+	ASSERT_EQ(pent.points, pent_zero_vector);
 }
 
 
 TEST(pentagon, middle_point2)
 {
-	std::vector<std::pair<double, double>> v(5);
-	v[0].first = 0; v[0].second = 0;
-	v[1].first = 0; v[1].second = 0;
-	v[2].first = 0; v[2].second = 0;
-	v[3].first = 0; v[3].second = 0;
-	v[4].first = 0; v[4].second = 0;
-
-	Pentagon pent(v);
-	std::pair<double, double> para;
-	para.first = 0;
-	para.second = 0;
-	ASSERT_EQ(pent.get_middle_point(), para);
-	ASSERT_EQ(pent.get_points(), v);
+	Pentagon<double> pent(pent_zero_vector);
+	std::pair<double, double> pair;
+	pair.first = 0;
+	pair.second = 0;
+	std::pair<double, double> middle_point = figures::get_middle_point<Pentagon<double>, double>(pent);
+	ASSERT_EQ(middle_point, pair);
+	ASSERT_EQ(pent.points, pent_zero_vector);
 }
 
 TEST(pentagon, side_amount)
 {
 	std::vector<std::pair<double, double>> v(7);
 
-	EXPECT_THROW(Pentagon pent(v), std::invalid_argument);
+	EXPECT_THROW(Pentagon<double> pent(v), std::invalid_argument);
 }
 
 TEST(pentagon, eq_operator)
 {
-	std::vector<std::pair<double, double>> v(5);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-
-	std::vector<std::pair<double, double>> v1(5);
-	v1[0].first = 3; v1[0].second = 2;
-	v1[1].first = 2; v1[1].second = 3;
-	v1[2].first = 2; v1[2].second = 4;
-	v1[3].first = 3; v1[3].second = 5;
-	v1[4].first = 4; v1[4].second = 4;
-
-	Pentagon pent1(v);
-	Pentagon pent2(v);
-	Pentagon pent3(v1);
+	Pentagon<double> pent1(pent_vector);
+	Pentagon<double> pent2(pent_vector);
+	Pentagon<double> pent3(pent_vector2);
 
 	ASSERT_EQ(pent1, pent2);
 	ASSERT_FALSE(pent1 == pent3);
@@ -250,257 +171,138 @@ TEST(pentagon, eq_operator)
 
 TEST(pentagon, copy_operator)
 {
-	std::vector<std::pair<double, double>> v(5);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-
-	std::vector<std::pair<double, double>> v1(5);
-	v1[0].first = 3; v1[0].second = 2;
-	v1[1].first = 2; v1[1].second = 3;
-	v1[2].first = 2; v1[2].second = 4;
-	v1[3].first = 3; v1[3].second = 5;
-	v1[4].first = 4; v1[4].second = 4;
-
-	Pentagon pent1;
-	Pentagon pent2(v);
-	Pentagon pent3(v1);
+	Pentagon<double> pent1;
+	Pentagon<double> pent2(pent_vector);
+	Pentagon<double> pent3(pent_vector2);
 
     pent1 = pent2;
     ASSERT_EQ(pent1, pent2);
-    Pentagon pent4;
+    Pentagon<double> pent4;
     pent4 = pent1;
     pent2 = pent3;
     ASSERT_EQ(pent1, pent4);
 }
 
 TEST(pentagon, double_cast) {
-	std::vector<std::pair<double, double>> v(5);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 1; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 4;
-	v[4].first = 3; v[4].second = 3;
-
-    Pentagon pent1(v);
+    Pentagon<double> pent1(pent_vector);
     double a = (double)pent1;
     EXPECT_EQ(a, 3.5);
 }
 
 
+std::vector<std::pair<double, double>> rhomb_vector{{2, 1}, {1, 2}, {2, 3}, {3, 2}};
+std::vector<std::pair<double, double>> rhomb_vector2{{3, 2}, {2, 3}, {3, 4}, {4, 3}};
+std::vector<std::pair<double, double>> rhomb_zero_vector{{0, 0}, {0, 0}, {0, 0}, {0, 0}};
+
 TEST(rhombus, default_constructor)
 {
-	Rhombus rh;
-	std::pair<double, double> para;
-	para.first = 0;
-	para.second = 0;
-	ASSERT_EQ(rh.get_area(), 0);
-	ASSERT_EQ(rh.get_middle_point(), para);
-	ASSERT_EQ(rh.get_points().size(), 4);
+	Rhombus<double> rhomb;
+	std::pair<double, double> pair;
+	std::pair<double, double> pair2;
+	pair.first = 0;
+	pair.second = 0;
+	pair2.first = 0;
+	pair2.second = 0;
+	double area = figures::get_area<Rhombus<double>, double>(rhomb);
+	pair2 = figures::get_middle_point<Rhombus<double>, double>(rhomb);
+	ASSERT_EQ(area, 0);
+	ASSERT_EQ(pair2, pair);
+	ASSERT_EQ(rhomb.points, rhomb_zero_vector);
+	
 }
-
 
 TEST(rhombus, area1)
 {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 2;
-
-
-	Rhombus rh(v);
-	ASSERT_EQ(rh.get_area(), 2);
-	ASSERT_EQ(rh.get_points(), v);
+	Rhombus<double> rhomb(rhomb_vector);
+	double area = figures::get_area<Rhombus<double>, double>(rhomb);
+	ASSERT_EQ(area, 2);
+	ASSERT_EQ(rhomb.points, rhomb_vector);
 }
 
 TEST(rhombus, area2)
 {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 0; v[0].second = 0;
-	v[1].first = 0; v[1].second = 0;
-	v[2].first = 0; v[2].second = 0;
-	v[3].first = 0; v[3].second = 0;
-
-	Rhombus rh(v);
-	ASSERT_EQ(rh.get_area(), 0);
-	ASSERT_EQ(rh.get_points(), v);
+	Rhombus<double> rhomb(rhomb_zero_vector);
+	double area = figures::get_area<Rhombus<double>, double>(rhomb);
+	ASSERT_EQ(area, 0);
+	ASSERT_EQ(rhomb.points, rhomb_zero_vector);
 }
 
+TEST(rhombus, middle_point1)
+{
+	Rhombus<double> rhomb(rhomb_vector);
+	std::pair<double, double> pair;
+	pair.first = 2;
+	pair.second = 2;
+	std::pair<double, double> middle_point = figures::get_middle_point<Rhombus<double>, double>(rhomb);
+	ASSERT_EQ(middle_point, pair);
+	ASSERT_EQ(rhomb.points, rhomb_vector);
+}
 
 TEST(rhombus, middle_point2)
 {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 0; v[0].second = 0;
-	v[1].first = 0; v[1].second = 0;
-	v[2].first = 0; v[2].second = 0;
-	v[3].first = 0; v[3].second = 0;
-
-	Rhombus rh(v);
-	std::pair<double, double> para;
-	para.first = 0;
-	para.second = 0;
-	ASSERT_EQ(rh.get_middle_point(), para);
-	ASSERT_EQ(rh.get_points(), v);
+	Rhombus<double> rhomb(rhomb_zero_vector);
+	std::pair<double, double> pair;
+	pair.first = 0;
+	pair.second = 0;
+	std::pair<double, double> middle_point = figures::get_middle_point<Rhombus<double>, double>(rhomb);
+	ASSERT_EQ(middle_point, pair);
+	ASSERT_EQ(rhomb.points, rhomb_zero_vector);
 }
 
 TEST(rhombus, side_amount)
 {
 	std::vector<std::pair<double, double>> v(7);
 
-	EXPECT_THROW(Rhombus rh(v), std::invalid_argument);
+	EXPECT_THROW(Rhombus<double> rhomb(v), std::invalid_argument);
 }
 
 TEST(rhombus, eq_operator)
 {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 2;
+	Rhombus<double> rhomb1(rhomb_vector);
+	Rhombus<double> rhomb2(rhomb_vector);
+	Rhombus<double> rhomb3(rhomb_vector2);
 
-	std::vector<std::pair<double, double>> v1(4);
-	v1[0].first = 2; v1[0].second = 2;
-	v1[1].first = 1; v1[1].second = 3;
-	v1[2].first = 2; v1[2].second = 4;
-	v1[3].first = 3; v1[3].second = 3;
-
-
-	Rhombus rh1(v);
-	Rhombus rh2(v);
-	Rhombus rh3(v1);
-
-	ASSERT_EQ(rh1, rh2);
-	ASSERT_FALSE(rh1 == rh3);
+	ASSERT_EQ(rhomb1, rhomb2);
+	ASSERT_FALSE(rhomb1 == rhomb3);
 }
 
 TEST(rhombus, copy_operator)
 {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 2;
+	Rhombus<double> rhomb1;
+	Rhombus<double> rhomb2(rhomb_vector);
+	Rhombus<double> rhomb3(rhomb_vector2);
 
-	std::vector<std::pair<double, double>> v1(4);
-	v1[0].first = 2; v1[0].second = 2;
-	v1[1].first = 1; v1[1].second = 3;
-	v1[2].first = 2; v1[2].second = 4;
-	v1[3].first = 3; v1[3].second = 3;
-
-
-	Rhombus rh1;
-	Rhombus rh2(v);
-	Rhombus rh3(v1);
-
-    rh1 = rh2;
-    ASSERT_EQ(rh1, rh2);
-    Rhombus rh4;
-    rh4 = rh1;
-    rh2 = rh3;
-    ASSERT_EQ(rh1, rh4);
+    rhomb1 = rhomb2;
+    ASSERT_EQ(rhomb1, rhomb2);
+    Rhombus<double> rhomb4;
+    rhomb4 = rhomb1;
+    rhomb2 = rhomb3;
+    ASSERT_EQ(rhomb1, rhomb4);
 }
 
 TEST(rhombus, double_cast) {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 2;
-
-
-    Rhombus rh1(v);
-    double a = (double)rh1;
+    Rhombus<double> rhomb1(rhomb_vector);
+    double a = (double)rhomb1;
     EXPECT_EQ(a, 2);
 }
 
-TEST(rhombus, exception_not_a_rhombus) {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 3;
-
-    EXPECT_THROW(Rhombus rh1(v), std::invalid_argument);
-}
-
 TEST(array, default_constructor) {
-	Array arr;
+	Array<Hexagon<double>> arr;
 
-	for(int i = 0; i < 1000; i++) 
-		ASSERT_EQ(arr[i], nullptr);
+	ASSERT_EQ(arr.total_area(), 0);
+	EXPECT_THROW(arr.delete_figure(1), std::invalid_argument);
 }
 
 TEST(array, replace_figure) {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 2;
+	Rhombus<double> rh(rhomb_vector);
+	Rhombus<double> rh2(rhomb_vector2);
+	std::shared_ptr<Rhombus<double>> sp_rhomb = std::make_shared<Rhombus<double>>(rh);
+	std::shared_ptr<Rhombus<double>> sp_rhomb2 = std::make_shared<Rhombus<double>>(rh2);
 
-	Array arr;
-	Rhombus rh(v);
-	arr.replace_figure(0, &rh);
+	Array<Rhombus<double>> arr{{sp_rhomb, sp_rhomb2}};
 
-	ASSERT_EQ(arr[0], &rh);
+	ASSERT_EQ(arr.total_area(), 4);
 }
-
-TEST(array, average_area) {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 2;
-
-	std::vector<std::pair<double, double>> v1(4);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 0; v[1].second = 3;
-	v[2].first = 2; v[2].second = 5;
-	v[3].first = 4; v[3].second = 3;
-
-	Array arr;
-	Rhombus rh(v);
-	Rhombus rh1(v1);
-	arr.replace_figure(0, &rh);
-	arr.replace_figure(1, &rh1);
-
-	ASSERT_EQ(arr.average_area(), 4);
-}
-
-TEST(array, delete_figure) {
-	std::vector<std::pair<double, double>> v(4);
-	v[0].first = 1; v[0].second = 1;
-	v[1].first = 0; v[1].second = 2;
-	v[2].first = 1; v[2].second = 3;
-	v[3].first = 2; v[3].second = 2;
-
-	std::vector<std::pair<double, double>> v1(4);
-	v[0].first = 2; v[0].second = 1;
-	v[1].first = 0; v[1].second = 3;
-	v[2].first = 2; v[2].second = 5;
-	v[3].first = 4; v[3].second = 3;
-
-	Array arr;
-	Rhombus rh(v);
-	Rhombus rh1(v1);
-	arr.replace_figure(0, &rh);
-	arr.replace_figure(1, &rh1);
-	arr.delete_figure(1);
-
-	ASSERT_EQ(arr[1], nullptr);
-}
-/*
-
-2 1
-1 2
-1 3
-2 4
-3 3
-при этих входных Площадь: 3.5
-Центральная точка: 1.8 2.6
-*/
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
