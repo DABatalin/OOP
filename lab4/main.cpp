@@ -28,7 +28,7 @@ int main() {
 	double area = figures::get_area<Hexagon<double>, double>(hex);
 	pair2 = figures::get_middle_point<Hexagon<double>, double>(hex);
 
-	std::cout << "Area: " << area << std::endl << pair2.first << pair2.second << std::endl;
+	std::cout << "Area: " << area << std::endl << pair2.first << " " << pair2.second << std::endl;
 
 	std::shared_ptr<Hexagon<double>> sp_hex = std::make_shared<Hexagon<double>>(hex);
 	std::shared_ptr<Hexagon<double>> sp_hex2 = std::make_shared<Hexagon<double>>(hex2);
